@@ -90,11 +90,11 @@ namespace IXLA.Sdk.Xp24
         /// <summary>
         /// Marks the specified layout
         /// </summary>
-        /// <param name="layout">The name of the layout we want to mark. Layouts name are given when </param>
-        /// <param name="offsetX"></param>
-        /// <param name="offsetY"></param>
-        /// <param name="angle"></param>
-        /// <returns></returns>
+        /// <param name="layout">The name of the layout we want to mark. Layouts name are given when LoadDocument is called</param>
+        /// <param name="offsetX">x offset in mm by which entities will be translated before marking</param>
+        /// <param name="offsetY">y offset in mm by which entities will be translated before marking</param>
+        /// <param name="angle">angle by which entities will be rotated before marking</param>
+        /// <returns>Returns when the mark process ends</returns>
         public async Task<MarkLayoutResponse> MarkLayoutAsync(string layout, double offsetX = 0.0d, double offsetY = 0.0d, double angle = 0.0d) => await _client.SendCommandAsync<MarkLayoutResponse>(new MarkLayoutCommand
         {
             Layout = layout,
