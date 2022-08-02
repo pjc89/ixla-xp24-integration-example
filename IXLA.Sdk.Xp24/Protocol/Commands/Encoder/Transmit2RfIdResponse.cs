@@ -12,9 +12,9 @@ namespace IXLA.Sdk.Xp24.Protocol.Commands.Encoder
 
         public override void DeserializeAttributes(XmlReader reader)
         {
-            var chipReplay = reader.GetAttribute("ChipReply");
-            if (chipReplay is null) return;
-            ChipReply = Convert.FromBase64String(chipReplay);
+            var chipReply = reader.GetAttribute("ChipReply");
+            if (chipReply is null) return;
+            ChipReply = Convert.FromBase64String(chipReply);
         }
     }
 }

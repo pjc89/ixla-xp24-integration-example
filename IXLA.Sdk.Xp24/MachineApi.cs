@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using IXLA.Sdk.Xp24.Protocol.Commands;
+using IXLA.Sdk.Xp24.Protocol.Commands.Vision;
+using IXLA.Sdk.Xp24.Protocol.Commands.Status;
 using IXLA.Sdk.Xp24.Protocol.Commands.Encoder;
+using IXLA.Sdk.Xp24.Protocol.Commands.Transport;
 using IXLA.Sdk.Xp24.Protocol.Commands.Interface;
 using IXLA.Sdk.Xp24.Protocol.Commands.Interface.Model;
-using IXLA.Sdk.Xp24.Protocol.Commands.Transport;
-using IXLA.Sdk.Xp24.Protocol.Commands.Vision;
 
 namespace IXLA.Sdk.Xp24
 {
@@ -17,7 +18,7 @@ namespace IXLA.Sdk.Xp24
     public class MachineApi : IDisposable
     {
         private readonly MachineClient _client;
-        
+
         /// <summary>
         /// </summary>
         /// <param name="client">A machine client. Make sure you call ConnectAsync on the machine client instance before trying to use the methods of this class</param>
@@ -25,31 +26,37 @@ namespace IXLA.Sdk.Xp24
         {
             _client = client;
         }
-        
+
         /// <summary>
         /// Resets the machine and waits for the response
         /// </summary>
         /// <returns>A ResetResponse object</returns>
         public async Task<ResetResponse> ResetAsync() => await _client.SendCommandAsync<ResetResponse>(new ResetCommand());
-        
+
+        /// <summary>
+        /// Returns the machine status
+        /// </summary>
+        /// <returns></returns>
+        public async Task<MachineStatusResponse> GetMachineStatus() => await _client.SendCommandAsync<MachineStatusResponse>(new MachineStatusCommand());
+
         /// <summary>
         /// Moves a passport from the feeder to the laser position
         /// </summary>
         /// <returns></returns>
         public async Task<LoadPassportResponse> LoadPassportAsync() => await _client.SendCommandAsync<LoadPassportResponse>(new LoadPassportCommand());
-        
+
         /// <summary>
         /// Ejects a passport from the laser position
         /// </summary>
         /// <returns></returns>
         public async Task<EjectResponse> EjectAsync() => await _client.SendCommandAsync<EjectResponse>(new EjectCommand());
-        
+
         /// <summary>
         /// Retrieves the list of currently loaded layouts in SAMLight
         /// </summary>
         /// <returns></returns>
         public async Task<GetLayoutsResponse> GetLayoutsAsync() => await _client.SendCommandAsync<GetLayoutsResponse>(new GetLayoutsCommand());
-        
+
         /// <summary>
         /// Loads a new document in samlight
         /// </summary>
@@ -59,27 +66,27 @@ namespace IXLA.Sdk.Xp24
         /// <returns></returns>
         public async Task<LoadDocumentResponse> LoadDocumentAsync(string layoutName, byte[] data, int rotation = default) =>
             await _client.SendCommandAsync<LoadDocumentResponse>(new LoadDocumentCommand(layoutName, data, rotation));
-        
+
         /// <summary>
         /// Updates data in the current layout
         /// </summary>
         /// <param name="entities"></param>
         /// <returns></returns>
         public async Task<UpdateDocumentResponse> UpdateDocumentAsync(IEnumerable<Entity> entities) => await _client.SendCommandAsync<UpdateDocumentResponse>(new UpdateDocumentCommand(entities));
-        
+
         /// <summary>
         /// Tries to connect to a smart card using the contactless reader using the PCSC interface
         /// </summary>
         /// <returns>A Connect2RfIdRespnose object. The response object contains </returns>
         public async Task<Connect2RfIdResponse> Connect2RfId() => await _client.SendCommandAsync<Connect2RfIdResponse>(new Connect2RfIdCommand());
-        
+
         /// <summary>
         /// Tries to send an APDU to the card
         /// </summary>
         /// <param name="apdu"></param>
         /// <returns></returns>
         public async Task<Transmit2RfIdResponse> Transmit2RfId(params byte[] apdu) => await _client.SendCommandAsync<Transmit2RfIdResponse>(new Transmit2RfIdCommand(apdu));
-        
+
         /// <summary>
         /// Marks the specified layout
         /// </summary>
@@ -102,7 +109,7 @@ namespace IXLA.Sdk.Xp24
         /// </summary>
         /// <returns></returns>
         public async Task<GetPatternsResponse> GetPatterns() => await _client.SendCommandAsync<GetPatternsResponse>(new GetPatternsCommand());
-        
+
         /// <summary>
         /// Executes XY AutoPosition
         /// </summary>

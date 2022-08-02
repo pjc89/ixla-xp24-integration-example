@@ -137,7 +137,7 @@ namespace IXLA.Sdk.Xp24
 
                 using var executionXmlReader = await WaitCompletion(timeout).ConfigureAwait(false);
 
-                // for async commands usually the second response (executed true/false) carries also date
+                // for async commands usually the second response (executed true/false) carries also data
                 response.Hydrate(executionXmlReader, false);
                 if (!response.Executed) throw new Exception($"Failed to execute command {command.Name}. Error message: {command.Name}");
 
@@ -172,7 +172,7 @@ namespace IXLA.Sdk.Xp24
 
         /// <summary>
         /// Handle interlock notifications sent by the machine. These notifications are sent to all connected clients
-        /// when the laser interlock changes status. You cha use the GetInterlockCommands to read the current interlock status
+        /// when the laser interlock changes status. You can use the GetInterlocksCommand to read the current interlock status
         /// </summary>
         /// <param name="reader"></param>
         /// <param name="line"></param>

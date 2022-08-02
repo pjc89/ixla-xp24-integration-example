@@ -10,7 +10,7 @@ namespace TestApp
     {
         private static async Task Main(string[] args)
         {
-            // cancellation token to break the loop ad stop the applciation
+            // cancellation token to break the loop ad stop the application
             var appCancellation = new CancellationTokenSource();
             var appStopped = appCancellation.Token;
 
@@ -23,7 +23,7 @@ namespace TestApp
                 appCancellation.Cancel();
             };
 
-            // them machine client is written in such a way that prevents to execute commands in parallel
+            // the machine client is written in such a way that prevents to execute commands in parallel
             // if you want to handle encoding and marking in parallel the simplest implementation would 
             // be to use a second instance (that connects to port 5556) where you send the commands for 
             // the encoder (connect2rfid and transmit2rfid)
@@ -38,7 +38,9 @@ namespace TestApp
                 await client.ConnectAsync(args[0], int.Parse(args[1]), appStopped);
                 var machineApi = new MachineApi(client);
 
-                // changes the sfj file with anything you want 
+                var machineStatusResponse = await machineApi.GetMachineStatus();
+                Console.WriteLine(System.Text.Json.JsonSerializer.Serialize(machineStatusResponse));
+
                 // I put a sample sjf file in the application binary folder. Just be careful 
                 // that pens (most likely) will not be set correctly. Replace the passport sfj file 
                 // with an sfj file that has pens correctly configured before trying to mark
@@ -61,11 +63,10 @@ namespace TestApp
                 // var transmitResponse = await machineApi.Transmit2RfId(0xff, 0xca, 0x00, 0x00, 0x00);
                 // Console.WriteLine($"chip reply: {BitConverter.ToString(transmitResponse.ChipReply)}");
 
-
                 // update some entities
                 await machineApi.UpdateDocumentAsync(new Entity[]
                 {
-                    // this are entities present in passport.sjf 
+                    // these are entities present in passport.sjf 
                     new UpdateTextEntity("NAME1", "Pablo Julian"),
                     new UpdateTextEntity("SURNAME1", "Cirillo"),
                     new UpdateTextEntity("NATIONALITY1", "Argentina"),
@@ -78,8 +79,8 @@ namespace TestApp
                 // var autoPosResponse = await machineApi.PerformAutoPosition("a_pre_configured_pattern");
 
                 // mark layout
-                // the offsetX and offsetY parameters can be retrived using the "autoposition" command. 
-                // I left them commented here because i didn't configure autoposition in the machine that I'm using for testing 
+                // the offsetX and offsetY parameters can be retrieved using the "autoposition" command. 
+                // I left them commented here because i didn't configure auto-position in the machine that I'm using for testing 
                 await machineApi.MarkLayoutAsync("my_passport"
                     // ,offsetX: autoPosResponse.XOffset,
                     // offsetY: autoPosResponse.YOffset
