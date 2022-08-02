@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IXLA.Sdk.Xp24", "IXLA.Sdk.Xp24\IXLA.Sdk.Xp24.csproj", "{5C1F01B1-BC72-41DE-8784-2A5DEDAFD2D0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.csproj", "{261D6FC3-E83F-4D35-8267-A039B5AF5578}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5C1F01B1-BC72-41DE-8784-2A5DEDAFD2D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C1F01B1-BC72-41DE-8784-2A5DEDAFD2D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C1F01B1-BC72-41DE-8784-2A5DEDAFD2D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C1F01B1-BC72-41DE-8784-2A5DEDAFD2D0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{261D6FC3-E83F-4D35-8267-A039B5AF5578}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{261D6FC3-E83F-4D35-8267-A039B5AF5578}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{261D6FC3-E83F-4D35-8267-A039B5AF5578}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{261D6FC3-E83F-4D35-8267-A039B5AF5578}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
