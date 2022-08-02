@@ -9,11 +9,15 @@ namespace IXLA.Sdk.Xp24.Protocol.Commands.Status
         public LaserStatus LaserStatus { get; set; }
         public InterfaceStatus InterfaceStatus { get; set; }
         public TransportStatus TransportStatus { get; set; }
-        
+
+        public bool IsMachineReady => LaserStatus == LaserStatus.Ready
+                                      && InterfaceStatus == InterfaceStatus.Ready
+                                      && TransportStatus == TransportStatus.Ready;
+
         public MachineStatusResponse(MachineCommand command) : base(command)
         {
         }
-        
+
         public override void DeserializeAttributes(XmlReader reader)
         {
             if (Enum.TryParse<TransportStatus>(reader.GetAttribute("transportstatus") ?? "", true, out var transportStatus))

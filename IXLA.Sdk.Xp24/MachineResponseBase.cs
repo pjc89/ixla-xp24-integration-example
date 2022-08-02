@@ -29,11 +29,11 @@ namespace IXLA.Sdk.Xp24
             {
                 // we do the trim/tolower here because the server serializes the responses
                 // in a weird way that breaks standard XmlSerialization for booleans
-                // sadly this legacy stuff that we cannot change right now because it would 
+                // sadly this is legacy stuff that we cannot change right now because it would 
                 // break existing client implementations.
                 Valid = reader.GetAttribute("valid")?.Trim().ToLower() == "true";
                 
-                // only async send the executed attribute
+                // only commands async send the executed attribute
                 // Valid = false for sync commands means the command was not 
                 // executed 
                 Executed = Valid;

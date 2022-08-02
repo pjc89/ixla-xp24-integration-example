@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net.Sockets;
 using System.Threading;
@@ -8,12 +7,6 @@ using System.Xml;
 
 namespace IXLA.Sdk.Xp24
 {
-
-    public class MachineClientOptions
-    {
-        public bool ThrowExceptionOnServerError { get; set; }
-    }
-
     /// <summary>
     /// This type abstracts the network layer and handles the application protocol, based on the type of command
     /// waits for acks/execution
@@ -70,11 +63,9 @@ namespace IXLA.Sdk.Xp24
             await _reader.ReadLineAsync();
             await _reader.ReadLineAsync();
         }
-        
-        
 
         /// <summary>
-        /// Sends \r\n to the server before disposing the Tcp client/stream. This was 
+        /// Sends \r\n to the server before disposing the Tcp client/stream.
         /// </summary>
         public async Task GracefulDisconnectAsync()
         {
